@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
+import 'about_screen.dart';
+import 'contact_screen.dart';
+import 'gallery_screen.dart';
 import 'home_screen.dart';
 import 'services_screen.dart';
-import 'gallery_screen.dart';
-import 'contact_screen.dart';
-import 'about_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
 
   @override
- State<NavigationScreen> createState() => _NavigationScreenState();
+  State<NavigationScreen> createState() => _NavigationScreenState();
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [
+  int currentIndex = 0;
+
+  final List<Widget> screens = const [
     HomeScreen(),
     ServicesScreen(),
     GalleryScreen(),
@@ -27,37 +28,41 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+      body: screens[currentIndex],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: currentIndex,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.build),
+          NavigationDestination(
+            icon: Icon(Icons.build_outlined),
+            selectedIcon: Icon(Icons.build),
             label: "Services",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.photo),
+          NavigationDestination(
+            icon: Icon(Icons.photo_outlined),
+            selectedIcon: Icon(Icons.photo),
             label: "Gallery",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.call),
+          NavigationDestination(
+            icon: Icon(Icons.call_outlined),
+            selectedIcon: Icon(Icons.call),
             label: "Contact",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
+          NavigationDestination(
+            icon: Icon(Icons.info_outline),
+            selectedIcon: Icon(Icons.info),
             label: "About",
           ),
         ],
+        onDestinationSelected: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
       ),
     );
   }
