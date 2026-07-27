@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screens/navigation_screen.dart';
+
 class RaihanAutoApp extends StatelessWidget {
   const RaihanAutoApp({super.key});
 
@@ -12,30 +14,7 @@ class RaihanAutoApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.red,
       ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Raihan Auto Service'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'Motorcycle Service Center',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      home: const NavigationScreen(),
     );
   }
 }
