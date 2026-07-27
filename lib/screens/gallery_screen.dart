@@ -9,25 +9,10 @@ class GalleryScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Gallery"),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: const EdgeInsets.all(12),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        children: List.generate(
-          6,
-          (index) => Container(
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Center(
-              child: Icon(
-                Icons.motorcycle,
-                size: 50,
-              ),
-            ),
-          ),
+      body: const Center(
+        child: Text(
+          "Service photos will be added here.",
+          style: TextStyle(fontSize: 18),
         ),
       ),
     );
