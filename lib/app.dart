@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/navigation_screen.dart';
+import 'theme/app_theme.dart';
 
 class RaihanAutoApp extends StatelessWidget {
   const RaihanAutoApp({super.key});
@@ -8,12 +9,9 @@ class RaihanAutoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Raihan Auto Service',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.red,
-      ),
+      title: 'Raihan Auto Service',
+      theme: AppTheme.lightTheme,
       home: const NavigationScreen(),
     );
   }
