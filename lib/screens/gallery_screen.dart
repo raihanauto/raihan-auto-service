@@ -3,17 +3,39 @@ import 'package:flutter/material.dart';
 class GalleryScreen extends StatelessWidget {
   const GalleryScreen({super.key});
 
+  final List<String> images = const [
+    'assets/images/logo.png',
+    'assets/images/banner.png',
+    'assets/images/logo.png',
+    'assets/images/banner.png',
+    'assets/images/logo.png',
+    'assets/images/banner.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Gallery"),
+        centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          "Service photos will be added here.",
-          style: TextStyle(fontSize: 18),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(12),
+        itemCount: images.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
         ),
+        itemBuilder: (context, index) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              images[index],
+              fit: BoxFit.cover,
+            ),
+          );
+        },
       ),
     );
   }
