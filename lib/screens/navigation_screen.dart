@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'about_screen.dart';
-import 'contact_screen.dart';
-import 'gallery_screen.dart';
 import 'home_screen.dart';
 import 'services_screen.dart';
+import 'gallery_screen.dart';
+import 'contact_screen.dart';
+import 'about_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
@@ -14,10 +14,9 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
+  int _selectedIndex = 0;
 
-  int currentIndex = 0;
-
-  final List<Widget> screens = const [
+  final List<Widget> _screens = const [
     HomeScreen(),
     ServicesScreen(),
     GalleryScreen(),
@@ -25,12 +24,19 @@ class _NavigationScreenState extends State<NavigationScreen> {
     AboutScreen(),
   ];
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[currentIndex],
+      body: _screens[_selectedIndex],
       bottomNavigationBar: NavigationBar(
-        selectedIndex: currentIndex,
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onItemTapped,
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
@@ -43,8 +49,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
             label: "Services",
           ),
           NavigationDestination(
-            icon: Icon(Icons.photo_outlined),
-            selectedIcon: Icon(Icons.photo),
+            icon: Icon(Icons.photo_library_outlined),
+            selectedIcon: Icon(Icons.photo_library),
             label: "Gallery",
           ),
           NavigationDestination(
@@ -58,11 +64,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
             label: "About",
           ),
         ],
-        onDestinationSelected: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
       ),
     );
   }
