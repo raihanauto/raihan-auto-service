@@ -3,105 +3,52 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  Widget buildMenuCard(
-      IconData icon,
-      String title,
-      BuildContext context,
-      ) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: () {},
-        child: SizedBox(
-          height: 120,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 40,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Raihan Auto Service"),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
 
-            const SizedBox(height: 20),
-
-            Center(
-              child: Image.asset(
-                "assets/images/logo.png",
-                width: 140,
-                height: 140,
+              Image.asset(
+                'assets/images/banner.png',
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-            ),
 
-            const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
-            const Text(
-              "Welcome to Raihan Auto Service",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+              Image.asset(
+                'assets/images/logo.png',
+                width: 120,
+                height: 120,
               ),
-            ),
 
-            const SizedBox(height: 8),
+              const SizedBox(height: 15),
 
-            const Text(
-              "Your Bike, Our Care",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+              const Text(
+                "Welcome to Raihan Auto Service",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
 
-            const SizedBox(height: 24),
+              const SizedBox(height: 10),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                children: [
-                  buildMenuCard(Icons.build, "Services", context),
-                  buildMenuCard(Icons.photo, "Gallery", context),
-                  buildMenuCard(Icons.location_on, "Location", context),
-                  buildMenuCard(Icons.call, "Contact", context),
-                ],
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "Your trusted motorcycle service center.",
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
 
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
