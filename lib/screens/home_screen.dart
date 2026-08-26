@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/contact_info.dart';
+import '../services/service_data.dart';
 import '../services/url_service.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -39,6 +40,7 @@ class HomeScreen extends StatelessWidget {
               const Center(
                 child: Text(
                   "Welcome to Raihan Auto Service",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -75,27 +77,27 @@ class HomeScreen extends StatelessWidget {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Wrap(
-                  spacing: 12,
-                  runSpacing: 12,
-                  children: const [
-                    _ServiceCard(
-                      icon: Icons.build,
-                      title: "Engine Service",
-                    ),
-                    _ServiceCard(
-                      icon: Icons.oil_barrel,
-                      title: "Engine Oil",
-                    ),
-                    _ServiceCard(
-                      icon: Icons.tire_repair,
-                      title: "Tyre Service",
-                    ),
-                    _ServiceCard(
-                      icon: Icons.battery_charging_full,
-                      title: "Battery Check",
-                    ),
-                  ],
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final cardWidth = constraints.maxWidth >= 700
+                        ? (constraints.maxWidth - 24) / 3
+                        : (constraints.maxWidth - 12) / 2;
+
+                    return Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      children: services.map((service) {
+                        return SizedBox(
+                          width: cardWidth,
+                          child: _ServiceCard(
+                            icon: service.icon,
+                            title: service.title,
+                            englishTitle: service.englishTitle,
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  },
                 ),
               ),
 
@@ -157,40 +159,53 @@ class HomeScreen extends StatelessWidget {
 class _ServiceCard extends StatelessWidget {
   final IconData icon;
   final String title;
+  final String englishTitle;
 
   const _ServiceCard({
     required this.icon,
     required this.title,
+    required this.englishTitle,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 160,
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Icon(
-                icon,
-                size: 40,
-                color: Colors.red,
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 40,
+              color: Colors.red,
+            ),
+
+            const SizedBox(height: 10),
+
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 10),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+
+            const SizedBox(height: 4),
+
+            Text(
+              englishTitle,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
